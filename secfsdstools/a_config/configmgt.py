@@ -55,8 +55,7 @@ class ConfigurationManager:
         Returns:
             Configuration: configuration instance
         """
-        env_config_file = os.getenv(SECFSDSTOOLS_ENV_VAR_NAME)
-        if env_config_file:
+        if env_config_file := os.getenv(SECFSDSTOOLS_ENV_VAR_NAME):
             LOGGER.info('read configuration from %s', env_config_file)
             if not os.path.isfile(env_config_file):
                 LOGGER.error('environment variable %s was set.', SECFSDSTOOLS_ENV_VAR_NAME)
@@ -67,9 +66,9 @@ class ConfigurationManager:
                 LOGGER.error('config file created at %s.', env_config_file)
                 LOGGER.error('please check the content ant then restart')
                 raise ValueError(
-                    f'environment variable {SECFSDSTOOLS_ENV_VAR_NAME}' +
-                    ' was set but config file was not present. ' +
-                    f'It was created at location {env_config_file}. Please check it and rerun')
+                    f'environment variable {SECFSDSTOOLS_ENV_VAR_NAME} was set but config file was not present. '
+                    + f'It was created at location {env_config_file}. Please check it and rerun'
+                )
 
             return ConfigurationManager._read_configuration(env_config_file)
 
@@ -86,8 +85,8 @@ class ConfigurationManager:
             LOGGER.error('Config file created at %s. Please check the content and then rerun.',
                          home_cfg_file_path)
             raise ValueError(
-                'Config file not found at user home directory. ' +
-                f'It was created at location {home_cfg_file_path}. Please check content and rerun')
+                f'Config file not found at user home directory. It was created at location {home_cfg_file_path}. Please check content and rerun'
+            )
         return ConfigurationManager._read_configuration(home_cfg_file_path)
 
     @staticmethod

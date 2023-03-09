@@ -8,7 +8,7 @@ from secfsdstools.d_index.indexdataaccess import IndexFileProcessingState
 from secfsdstools.e_read.zipreportreading import ZipReportReader
 
 CURRENT_DIR, _ = os.path.split(__file__)
-PATH_TO_ZIP = CURRENT_DIR + '/testdata/2010q1.zip'
+PATH_TO_ZIP = f'{CURRENT_DIR}/testdata/2010q1.zip'
 
 
 @pytest.fixture

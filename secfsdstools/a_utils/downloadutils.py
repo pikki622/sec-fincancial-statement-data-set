@@ -54,9 +54,8 @@ class UrlDownloader:
         response = self.get_url_content(file_url, max_tries, sleep_time, headers=headers)
         content = response.text
 
-        if expected_size is not None:
-            if len(content) != expected_size:
-                LOGGER.info('warning expected size %d - real size %d', expected_size, len(content))
+        if expected_size is not None and len(content) != expected_size:
+            LOGGER.info('warning expected size %d - real size %d', expected_size, len(content))
 
         return write_content_to_zip(content, target_file)
 

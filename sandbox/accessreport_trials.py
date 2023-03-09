@@ -26,7 +26,7 @@ def match_group_iter(match_iter):
 def test_read_content_with_re():
     content = read_content_from_file_in_zip(TEST_FILE, "pre.txt")
 
-    first_line_pattern = re.compile(f"^.*$", re.MULTILINE)
+    first_line_pattern = re.compile("^.*$", re.MULTILINE)
     first_line = re.search(first_line_pattern, content)
     print(first_line.group())
 
@@ -52,5 +52,3 @@ def test_8k():
 
 # df = pd.read_csv(StringIO(csvString), sep=","
 
-if __name__ == '__main__':
-    pass

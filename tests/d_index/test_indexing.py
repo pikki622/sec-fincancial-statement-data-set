@@ -44,7 +44,7 @@ def test_all_indexed(reportindexer):
 def test_add_reports(reportindexer):
     current_dir, _ = os.path.split(__file__)
 
-    reportindexer.zip_dir = current_dir + "/testdata/"
+    reportindexer.zip_dir = f"{current_dir}/testdata/"
 
     reportindexer._index_file(file_name='2010q1.zip')
 
