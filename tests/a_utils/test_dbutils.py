@@ -7,8 +7,7 @@ from secfsdstools.a_utils.dbutils import DB
 
 @pytest.fixture
 def db(tmp_path):
-    db = DB(db_dir=str(tmp_path))
-    return db
+    return DB(db_dir=str(tmp_path))
 
 
 @dataclass

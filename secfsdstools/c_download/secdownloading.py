@@ -50,7 +50,7 @@ class SecZipDownloader(BaseDownloader):
         first_table = self.table_re.findall(content.text)[0]
         hrefs = self.href_re.findall(first_table)
 
-        hrefs = ['https://www.sec.gov' + href[6:-1] for href in hrefs]
+        hrefs = [f'https://www.sec.gov{href[6:-1]}' for href in hrefs]
         return [(os.path.basename(href), href) for href in hrefs]
 
     def _calculate_missing_zips(self) -> List[Tuple[str, str]]:

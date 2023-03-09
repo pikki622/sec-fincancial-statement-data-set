@@ -130,9 +130,7 @@ class ParallelExecutor(Generic[IT, PT, OT]):
         return self.pool.map(self._process_throttled, chunk)
 
     def _execute_serial(self, chunk: List[IT]) -> List[PT]:
-        results: List[PT] = []
-        for entry in chunk:
-            results.append(self._process_throttled(entry))
+        results: List[PT] = [self._process_throttled(entry) for entry in chunk]
         return results
 
     def execute(self) -> Tuple[List[OT], List[IT]]:

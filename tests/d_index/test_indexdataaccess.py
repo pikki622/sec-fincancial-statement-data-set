@@ -10,8 +10,7 @@ from secfsdstools.d_index.indexdataaccess import DBIndexingAccessor, IndexReport
 @pytest.fixture
 def indexaccessor(tmp_path):
     DbCreator(db_dir=str(tmp_path)).create_db()
-    accessor = DBIndexingAccessor(db_dir=str(tmp_path))
-    return accessor
+    return DBIndexingAccessor(db_dir=str(tmp_path))
 
 
 def test_indexreports(indexaccessor):

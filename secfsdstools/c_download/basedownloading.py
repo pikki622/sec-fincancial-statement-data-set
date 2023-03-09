@@ -50,8 +50,7 @@ class BaseDownloader(ABC):
         url: str = data[1]
 
         LOGGER.info('    start to download %s ', file)
-        result = self._download_zip(url=url, file=file)
-        return result
+        return self._download_zip(url=url, file=file)
 
     def _get_downloaded_zips(self) -> List[str]:
         return get_filenames_in_directory(os.path.join(self.zip_dir, '*.zip'))

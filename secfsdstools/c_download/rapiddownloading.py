@@ -78,13 +78,13 @@ class RapidZipDownloader(BaseDownloader):
         last_quarter_file_quarter = int(filename[5:6])
 
         cutoff: str = ''
-        if last_quarter_file_quarter < 4:
-            cutoff = str(last_quarter_file_year) \
-                     + str(((last_quarter_file_quarter * 3) + 1)).zfill(2) \
-                     + '00'
-        else:
-            cutoff = str(last_quarter_file_year + 1) + '0100'
-        return cutoff
+        return (
+            str(last_quarter_file_year)
+            + str(((last_quarter_file_quarter * 3) + 1)).zfill(2)
+            + '00'
+            if last_quarter_file_quarter < 4
+            else f'{str(last_quarter_file_year + 1)}0100'
+        )
 
     def _calculate_missing_zips(self) -> List[Tuple[str, str]]:
         # only download the daily zips for dates for which there is no quarter zip file yet
@@ -104,17 +104,21 @@ class RapidZipDownloader(BaseDownloader):
         # are bigger than the cutoff string
         missing_after_cut_off = [entry for entry in missing if entry[:8] > cutoff_str]
 
-        missing_tuple = [(filename, self.rapidurlbuilder.get_donwload_url(filename)) for filename in
-                         missing_after_cut_off]
-        return missing_tuple
+        return [
+            (filename, self.rapidurlbuilder.get_donwload_url(filename))
+            for filename in missing_after_cut_off
+        ]
 
     def _get_available_zips(self) -> List[str]:
         content = self._get_content()
         parsed_content = json.loads(content)
         daily_entries = parsed_content['daily']
 
-        available_files = [entry['file'] for entry in daily_entries if
-                           ((entry['subscription'] == 'basic') | (
-                                   entry['subscription'] == self.rapidurlbuilder.rapid_plan))]
-
-        return available_files
+        return [
+            entry['file']
+            for entry in daily_entries
+            if (
+                (entry['subscription'] == 'basic')
+                | (entry['subscription'] == self.rapidurlbuilder.rapid_plan)
+            )
+        ]

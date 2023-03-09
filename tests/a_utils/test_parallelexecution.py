@@ -5,6 +5,9 @@ from secfsdstools.a_utils.parallelexecution import ParallelExecutor
 
 def test_parallelexcution():
     # simple example to use it
+
+
+
     class MyTestClass:
         def __init__(self):
             self.data_list = [str(x) for x in range(500)]
@@ -18,7 +21,7 @@ def test_parallelexcution():
             return []
 
         def process_element(self, input: str) -> str:
-            return "0" + str(input)
+            return f"0{input}"
 
         def post_process(self, input: List[str]) -> List[str]:
             return input
@@ -31,6 +34,7 @@ def test_parallelexcution():
 
             self.result = executor.execute()
             executor.pool.close()
+
 
     processor = MyTestClass()
     processor.process()

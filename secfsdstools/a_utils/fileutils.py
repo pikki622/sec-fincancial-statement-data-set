@@ -70,7 +70,7 @@ def write_content_to_zip(content: str, filename: str) -> str:
     Returns:
         str: path to the zipfile that was ritten
     """
-    zip_filename = filename + ".zip"
+    zip_filename = f"{filename}.zip"
     with zipfile.ZipFile(zip_filename, mode="w", compression=zipfile.ZIP_DEFLATED) as zf_fp:
         file = Path(filename).name
         zf_fp.writestr(file, content)
@@ -86,6 +86,6 @@ def read_content_from_zip(filename: str) -> str:
     Returns:
         str: the content of a zipfile
     """
-    with zipfile.ZipFile(filename + ".zip", mode="r") as zf_fp:
+    with zipfile.ZipFile(f"{filename}.zip", mode="r") as zf_fp:
         file = Path(filename).name
         return zf_fp.read(file).decode("utf-8")
